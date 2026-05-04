@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prime Cut Barbershop</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0b0b0b;
+      color: white;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      width: 100%;
+      display: block;
+      border-radius: 18px;
+    }
+
+    .top-offer {
+      background: #d4af37;
+      color: #111;
+      text-align: center;
+      padding: 10px 20px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .hero {
+      min-height: 100vh;
+      background:
+        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
+        url("https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=1600&q=80");
+      background-size: cover;
+      background-position: center;
+      padding: 24px 8% 80px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      color: #d4af37;
+      letter-spacing: 1px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      font-weight: bold;
+      transition: 0.25s;
+    }
+
+    nav a:hover {
+      color: #d4af37;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 24px;
+      border-radius: 999px;
+      font-weight: bold;
+      transition: 0.25s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-gold {
+      background: #d4af37;
+      color: #111;
+    }
+
+    .btn-gold:hover {
+      background: white;
+      transform: translateY(-2px);
+    }
+
+    .btn-dark {
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: white;
+    }
+
+    .btn-dark:hover {
+      background: white;
+      color: #111;
+      transform: translateY(-2px);
+    }
+
+    .hero-content {
+      max-width: 760px;
+      margin-top: 130px;
+    }
+
+    .tag {
+      display: inline-block;
+      color: #f6dd88;
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      background: rgba(212, 175, 55, 0.12);
+      padding: 9px 15px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: 1.02;
+      margin-bottom: 22px;
+      letter-spacing: -2px;
+    }
+
+    .hero-content p {
+      color: #dddddd;
+      font-size: 18px;
+      max-width: 650px;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 38px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(120px, 1fr));
+      gap: 16px;
+      max-width: 650px;
+    }
+
+    .stat {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 18px;
+      border-radius: 18px;
+      backdrop-filter: blur(8px);
+    }
+
+    .stat h3 {
+      color: #d4af37;
+      font-size: 27px;
+      margin-bottom: 3px;
+    }
+
+    .stat p {
+      color: #cfcfcf;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    section {
+      padding: 90px 8%;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(34px, 5vw, 48px);
+      margin-bottom: 12px;
+      letter-spacing: -1px;
+    }
+
+    .section-heading p {
+      color: #bdbdbd;
+      max-width: 680px;
+      margin: auto;
+    }
+
+    .services {
+      background: #111;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: #191919;
+      border: 1px solid #2b2b2b;
+      padding: 28px;
+      border-radius: 22px;
+      position: relative;
+      transition: 0.25s;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-7px);
+      border-color: #d4af37;
+      box-shadow: 0 18px 45px rgba(212, 175, 55, 0.12);
+    }
+
+    .popular {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: #d4af37;
+      color: #111;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .card h3 {
+      color: #d4af37;
+      font-size: 23px;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #c9c9c9;
+      margin-bottom: 18px;
+    }
+
+    .price {
+      font-size: 31px;
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    .choose {
+      display: inline-block;
+      color: #111;
+      background: #d4af37;
+      border-radius: 999px;
+      padding: 9px 15px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 42px;
+      align-items: center;
+    }
+
+    .split h2 {
+      font-size: clamp(34px, 5vw, 48px);
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+
+    .split p {
+      color: #c9c9c9;
+      margin-bottom: 18px;
+    }
+
+    .check-list {
+      list-style: none;
+      margin-top: 20px;
+    }
+
+    .check-list li {
+      background: #151515;
+      border: 1px solid #2c2c2c;
+      margin-bottom: 12px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      color: #ddd;
+    }
+
+    .check-list strong {
+      color: #d4af37;
+    }
+
+    .gallery {
+      background: #111;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+    }
+
+    .review {
+      background: #171717;
+      border: 1px solid #2c2c2c;
+      padding: 26px;
+      border-radius: 20px;
+    }
+
+    .stars {
+      color: #d4af37;
+      margin-bottom: 12px;
+      letter-spacing: 2px;
+    }
+
+    .review p {
+      color: #d1d1d1;
+      margin-bottom: 18px;
+    }
+
+    .review h3 {
+      color: white;
+      font-size: 18px;
+    }
+
+    .booking {
+      background: #111;
+    }
+
+    form {
+      max-width: 820px;
+      margin: auto;
+      background: #191919;
+      border: 1px solid #2d2d2d;
+      border-radius: 24px;
+      padding: 34px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 15px;
+      background: #0e0e0e;
+      color: white;
+      border: 1px solid #333;
+      border-radius: 14px;
+      outline: none;
+      font-size: 15px;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #d4af37;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    .form-note {
+      color: #aaa;
+      font-size: 13px;
+      margin-top: 14px;
+    }
+
+    .cta {
+      text-align: center;
+      background: linear-gradient(135deg, #191919, #0d0d0d);
+      border-top: 1px solid #2b2b2b;
+      border-bottom: 1px solid #2b2b2b;
+    }
+
+    .cta h2 {
+      font-size: clamp(34px, 5vw, 52px);
+      margin-bottom: 14px;
+    }
+
+    .cta p {
+      color: #cfcfcf;
+      max-width: 690px;
+      margin: 0 auto 26px;
+    }
+
+    footer {
+      background: #070707;
+      color: #a8a8a8;
+      text-align: center;
+      padding: 34px 8%;
+      font-size: 14px;
+    }
+
+    .floating-btn {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      background: #d4af37;
+      color: #111;
+      padding: 14px 18px;
+      border-radius: 999px;
+      font-weight: bold;
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45);
+      z-index: 999;
+    }
+
+    @media (max-width: 850px) {
+      nav {
+        align-items: flex-start;
+      }
+
+      nav ul {
+        gap: 14px;
+      }
+
+      .hero-content {
+        margin-top: 90px;
+      }
+
+      .stats,
+      .split,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      section,
+      .hero {
+        padding-left: 5%;
+        padding-right: 5%;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      nav ul {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-offer">New clients get 20% off their first visit — book today</div>
+
+  <header class="hero" id="home">
+    <nav>
+      <div class="logo">PRIME CUT</div>
+
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#booking">Book</a></li>
+      </ul>
+
+      <a class="btn btn-gold" href="#booking">Book Now</a>
+    </nav>
+
+    <div class="hero-content">
+      <span class="tag">Premium Barbershop in New York</span>
+      <h1>Look sharp. Feel confident. Walk out fresh.</h1>
+      <p>
+        Clean fades, sharp lineups, beard trims, and modern styles. Prime Cut gives every client a fresh look with professional service and easy online booking.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="#booking">Book Appointment</a>
+        <a class="btn btn-dark" href="tel:+15551234567">Call Now</a>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <h3>500+</h3>
+          <p>happy clients</p>
+        </div>
+        <div class="stat">
+          <h3>4.9★</h3>
+          <p>average rating</p>
+        </div>
+        <div class="stat">
+          <h3>7 days</h3>
+          <p>open weekly</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="services" id="services">
+    <div class="section-heading">
+      <h2>Services & Prices</h2>
+      <p>Choose a service and it will be selected automatically in the booking form.</p>
+    </div>
+
+    <div class="cards">
+      <div class="card" onclick="selectService('Men’s Haircut - $30')">
+        <h3>Men’s Haircut</h3>
+        <p>Clean shape, fresh styling, and a professional finish.</p>
+        <div class="price">$30</div>
+        <span class="choose">Choose</span>
+      </div>
+
+      <div class="card" onclick="selectService('Skin Fade - $40')">
+        <span class="popular">Popular</span>
+        <h3>Skin Fade</h3>
+        <p>Smooth blend, sharp edges, and a clean modern look.</p>
+        <div class="price">$40</div>
+        <span class="choose">Choose</span>
+      </div>
+
+      <div class="card" onclick="selectService('Haircut + Beard - $52')">
+        <h3>Haircut + Beard</h3>
+        <p>Complete style with beard trim, lineup, and finish.</p>
+        <div class="price">$52</div>
+        <span class="choose">Choose</span>
+      </div>
+
+      <div class="card" onclick="selectService('Beard Trim - $20')">
+        <h3>Beard Trim</h3>
+        <p>Shape, clean lines, and a polished beard finish.</p>
+        <div class="price">$20</div>
+        <span class="choose">Choose</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="split">
+      <div>
+        <h2>A barbershop built for style, comfort, and confidence.</h2>
+        <p>
+          Prime Cut focuses on clean details, friendly service, and haircuts that match your face shape and personal style.
+        </p>
+        <p>
+          Whether you need a quick clean-up, a sharp skin fade, or a full haircut and beard package, we make the process simple.
+        </p>
+
+        <ul class="check-list">
+          <li><strong>Fast booking:</strong> request an appointment online in under one minute.</li>
+          <li><strong>Clear prices:</strong> no confusion before you arrive.</li>
+          <li><strong>Fresh results:</strong> clean fades, sharp lineups, and strong finishing.</li>
+        </ul>
+      </div>
+
+      <div>
+        <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=900&q=80" alt="Barber cutting hair" />
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery" id="gallery">
+    <div class="section-heading">
+      <h2>Shop Gallery</h2>
+      <p>Replace these photos with real shop photos or client haircut photos when you get a real customer.</p>
+    </div>
+
+    <div class="gallery-grid">
+      <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80" alt="Barbershop chair" />
+      <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=900&q=80" alt="Haircut tools" />
+      <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=900&q=80" alt="Barbershop interior" />
+    </div>
+  </section>
+
+  <section id="reviews">
+    <div class="section-heading">
+      <h2>Client Reviews</h2>
+      <p>Strong reviews help new clients trust the shop before booking.</p>
+    </div>
+
+    <div class="reviews-grid">
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>“The fade was clean and the service was professional. Definitely coming back.”</p>
+        <h3>Alex R.</h3>
+      </div>
+
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>“They listened to what I wanted and made the haircut fit my style.”</p>
+        <h3>Michael T.</h3>
+      </div>
+
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>“Good prices, clean shop, and the haircut looked sharp.”</p>
+        <h3>Daniel M.</h3>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Ready for a fresh cut?</h2>
+    <p>Book your first appointment today and get 20% off your first visit.</p>
+    <a class="btn btn-gold" href="#booking">Book Now</a>
+  </section>
+
+  <section class="booking" id="booking">
+    <div class="section-heading">
+      <h2>Online Booking</h2>
+      <p>Send an appointment request and we will confirm your time by phone or WhatsApp.</p>
+    </div>
+
+    <form action="mailto:sherstobitov345@icloud.com" method="POST" enctype="text/plain">
+      <div class="form-grid">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="tel" name="phone" placeholder="Phone Number" required />
+
+        <select id="serviceSelect" name="service" required>
+          <option value="">Choose Service</option>
+          <option>Men’s Haircut - $30</option>
+          <option>Skin Fade - $40</option>
+          <option>Haircut + Beard - $52</option>
+          <option>Beard Trim - $20</option>
+        </select>
+
+        <input type="date" name="date" required />
+        <input type="time" name="time" required />
+        <input type="text" name="social" placeholder="Instagram / WhatsApp (optional)" />
+        <textarea class="full" name="notes" placeholder="Extra notes: low fade, beard shape, evening appointment, etc."></textarea>
+      </div>
+
+      <br />
+      <button class="btn btn-gold" type="submit">Send Booking Request (Email)</button>
+      <p class="form-note">This form opens the user's email app and prepares a booking request to sherstobitov345@icloud.com. The user still needs to press Send in their email app.</p>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2026 Prime Cut Barbershop • 123 Main Street, New York • (555) 123-4567</p>
+    <p>Instagram: @primecutbarbershop • WhatsApp: +1 (555) 123-4567</p>
+  </footer>
+
+  <a class="floating-btn" href="#booking">Book Now</a>
+
+  <script>
+    function selectService(service) {
+      const select = document.getElementById("serviceSelect");
+
+      if (!select) {
+        console.error("Test failed: service select was not found.");
+        return;
+      }
+
+      select.value = service;
+
+      const bookingSection = document.getElementById("booking");
+      if (bookingSection) {
+        bookingSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    function runBasicTests() {
+      const serviceSelect = document.getElementById("serviceSelect");
+      console.assert(serviceSelect !== null, "Test 1 failed: #serviceSelect should exist.");
+
+      selectService("Skin Fade - $40");
+      console.assert(
+        serviceSelect.value === "Skin Fade - $40",
+        "Test 2 failed: selectService should choose Skin Fade - $40."
+      );
+
+      selectService("Men’s Haircut - $30");
+      console.assert(
+        serviceSelect.value === "Men’s Haircut - $30",
+        "Test 3 failed: selectService should choose Men’s Haircut - $30."
+      );
+
+      console.log("Basic tests finished. If there are no assertion errors above, the page is working.");
+    }
+
+    runBasicTests();
+  </script>
+</body>
+</html>
+
